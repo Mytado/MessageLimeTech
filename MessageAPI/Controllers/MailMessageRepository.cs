@@ -3,14 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 using System.IO;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using MessageAPI.Models;
-using Microsoft.AspNetCore.Mvc;
 
-namespace MessageAPI.Controllers 
+namespace MessageAPI.Controllers
 {
     public class MailMessageRepository : IMailMessageRepository
     {
@@ -49,6 +45,9 @@ namespace MessageAPI.Controllers
                     Console.WriteLine("Exception caught: {0}", ex.Message);
                 }
             }
+
+            /*
+            //double checking values, keep for now
             var foo = messages.FirstOrDefault();
             //alla värden stämmer överens enligt ovan mappning mot filen
             Console.WriteLine(
@@ -56,14 +55,7 @@ namespace MessageAPI.Controllers
                 " name:" + foo.Name + 
                 " modData:" + foo.ModifiedDate +
                 " isSent:" + foo.IsSent + 
-                " pubId:" + foo.PublicationId);
-
-            //Console.WriteLine(" type: " + tempMessageCollection.GetType());
-            /*foreach (var item in messages)
-            {
-                Console.WriteLine("item: " + item.Id + " name: " + item.Name);
-            }*/
-
+                " pubId:" + foo.PublicationId);*/
         }
 
         public bool Delete(int id)
@@ -100,6 +92,5 @@ namespace MessageAPI.Controllers
                 return null;
             }
         }
-
     }
 }

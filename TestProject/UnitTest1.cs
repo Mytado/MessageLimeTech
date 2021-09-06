@@ -7,14 +7,7 @@ namespace TestProject
 {
     public class UnitTest1
     {
-        [Fact]
-        public void GetAll()
-        {
-
-
-        }
-
-        //GOES THROUGH
+     
         [Theory]
         [InlineData(90)]
         [InlineData(122)]
@@ -27,7 +20,6 @@ namespace TestProject
 
         }
 
-        //GOES THROUGH
         [Fact]
         public void Delete()
         {
@@ -40,10 +32,5 @@ namespace TestProject
             Assert.Equal(expectedDoubleCheck, msg.GetById(idToBeRemoved));
         }
 
-        [Fact]
-        public void Find()
-        {
-
-        }
     }
 }
