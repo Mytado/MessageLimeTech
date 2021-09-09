@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Lime.Domain;
+using MessageAPI.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,40 +11,55 @@ using System.Threading.Tasks;
 
 namespace MessageAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/messages")]
     [ApiController]
     public class MessageController : ControllerBase
     {
+        private readonly IMailMessageRepository _messageRepository;
+        private readonly IMapper _mapper;
+
+
+        public MessageController(IMailMessageRepository messageRepository, IMapper mapper)
+        {
+            this._messageRepository = messageRepository;
+            this._mapper = mapper;
+
+        }
+
         // GET: api/<MessageController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ActionResult<IEnumerable<MessageDTO>> GetAllMessages()
         {
-            return new string[] { "value1", "value2" };
+            var allMessages = _messageRepository.GetAll();
+            return Ok(_mapper.Map<List<MessageDTO>>(allMessages));
         }
 
         // GET api/<MessageController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult<MessageDTO>> GetMessageById(int id)
         {
-            return "value";
-        }
-
-        // POST api/<MessageController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/<MessageController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
+            var message = _messageRepository.GetById(id);
+            return Ok(_mapper.Map<MessageDTO>(message));
         }
 
         // DELETE api/<MessageController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+            var message =  _messageRepository.GetById(id);
+            if (message == null)
+            {
+                return NotFound();
+            }
+
+            if (_messageRepository.Delete(id))
+            {
+                return NoContent();
+            } else
+            {
+                return BadRequest();
+            }
+           
         }
     }
 }

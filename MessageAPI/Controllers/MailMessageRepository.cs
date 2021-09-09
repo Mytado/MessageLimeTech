@@ -5,12 +5,15 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.IO;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MessageAPI.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class MailMessageRepository : IMailMessageRepository
     {
-        private List<MailMessage> messages;
+        private List<MailMessage> messages = new();
 
         public MailMessageRepository()
         {
@@ -19,7 +22,7 @@ namespace MessageAPI.Controllers
 
         private void InitMessages ()
         {
-            messages = new List<MailMessage>();
+            //messages = new List<MailMessage>();
             var jObjMessages = JsonConvert.DeserializeObject<dynamic>(File.ReadAllText("mail-messages.json"));
 
             var tempMessageCollection = jObjMessages["mailMessages"];
@@ -62,8 +65,15 @@ namespace MessageAPI.Controllers
         {
             try
             {
-                messages.RemoveAll(message => message.Id == id);
-                return true;
+                //messages.RemoveAll(message => message.Id == id);
+                var itemToRemove = messages.Where(m => m.Id == id);
+                if (itemToRemove != null)
+                {
+                    messages.RemoveAll(m => m.Id == id);
+                    return true; 
+                }
+                return false;
+                
             } catch
             {
                 return false;
