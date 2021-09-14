@@ -1,0 +1,81 @@
+.h2,
+h3,
+p {
+    color: var(--text-color) !important;
+    margin: 0;
+}
+
+.detailPageContainer {
+    display: grid;
+}
+
+.detailsContainer {
+    width: 700px;
+    box-sizing: border-box;
+    justify-self: center;
+}
+
+.messageTitle {
+    grid-area: "messageTitle";
+}
+
+.messageName {
+    grid-area: "messageName";
+}
+
+.messageDate {
+    grid-area: "messageDate";
+}
+
+.messageIsSent {
+    grid-area: "messageIsSent";
+}
+
+.card-header {
+    background-color: #fafaf4;
+    color: var(--text-color) !important;
+}
+
+.cardBodyCont {
+    background-color: #f8f9f5;
+    /*#f8f9f5*/
+    display: grid;
+    grid-area: "messageName messageName" "messageDate messageDate" "messageIsSent messageIsSent" "deleteButton backButton" !important;
+}
+
+.listName {
+    color: #f17a7e !important;
+}
+
+.deleteButton {
+    background-color: #f17a7e;
+    color: #f9faf4;
+    border-color: #f17a7e;
+    border-width: 2px;
+    grid-area: "deleteButton";
+    /*justify-self: flex-start;*/
+    grid-column: 1;
+}
+
+.backButton {
+    background-color: #f9a66c;
+    color: var(--text-color);
+    border-color: #f9a66c;
+    border-width: 2px;
+    grid-area: "backButton";
+    /*justify-self: flex-end;*/
+    grid-column: 2;
+}
+
+.deleteButton:hover {
+    background-color: #f39194;
+}
+
+.backButton:hover {
+    background-color: #ffc94b;
+}
+
+.buttonContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}

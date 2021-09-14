@@ -1,0 +1,37 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap');
+:root {
+    --footer-height: 45px;
+    --header-height: 80px;
+    --font: 'Playfair Display', serif;
+    --text-color: #4a6163;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font);
+    height: 100%;
+    background-color: #f9faf4 !important;
+}
+
+body * {
+    box-sizing: border-box;
+    font-family: var(--font) !important;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+app-root {
+    display: block;
+    min-height: 100vh;
+}

@@ -1,0 +1,24 @@
+.searchForm {
+    display: flex;
+}
+
+.searchButton {
+    background-color: #f9a66c;
+    color: var(--text-color);
+    border-color: #f9a66c;
+    border-width: 2px;
+}
+
+.searchButton:hover {
+    background-color: #ffc94b;
+}
+
+.searchInput {
+    border-color: #f9a66c !important;
+    border: solid 2px;
+    width: 100%;
+}
+
+.searchContainer {
+    width: 100%;
+}

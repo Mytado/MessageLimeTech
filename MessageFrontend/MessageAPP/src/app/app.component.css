@@ -1,0 +1,26 @@
+.appContainer {
+    height: 100vh;
+    margin-bottom: -40px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: var(--header-height) 0px 1fr var(--footer-height);
+}
+
+.footer {
+    height: var(--footer-height);
+    background-color: #4a6163;
+    text-align: center;
+    color: #f9faf4;
+}
+
+.header {
+    height: var(--header-height);
+    background-color: #4a6163;
+    color: #f17a7e !important;
+    font: var(--font) !important;
+    font: 600 !important;
+}
+
+.header h1 {
+    font-size: 45px;
+}

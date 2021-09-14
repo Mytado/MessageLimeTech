@@ -1,0 +1,14 @@
+.listButton {
+    background-color: #f9a66c;
+    color: var(--text-color);
+    border-color: #f9a66c;
+    border-width: 2px;
+}
+
+.listButton:hover {
+    background-color: #ffc94b;
+}
+
+.td {
+    color: var(--text-color) !important;
+}

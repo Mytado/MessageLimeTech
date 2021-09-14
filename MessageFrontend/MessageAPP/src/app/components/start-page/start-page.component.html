@@ -1,0 +1,4 @@
+<div class="startPageContainer m-5">
+    <app-search-bar (newListEvent)="sendEventToListComp($event)"></app-search-bar>
+    <app-message-list [searchMessagesEvent]="sendListEvent" (messageDetailIdEvent)="receiveMessageDetail($event)"></app-message-list>
+</div>
