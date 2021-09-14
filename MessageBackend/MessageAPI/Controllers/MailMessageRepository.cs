@@ -9,8 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MessageAPI.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
+    
     public class MailMessageRepository : IMailMessageRepository
     {
         private List<MailMessage> messages = new();
@@ -22,11 +21,8 @@ namespace MessageAPI.Controllers
 
         private void InitMessages ()
         {
-            //messages = new List<MailMessage>();
             var jObjMessages = JsonConvert.DeserializeObject<dynamic>(File.ReadAllText("mail-messages.json"));
-
             var tempMessageCollection = jObjMessages["mailMessages"];
-            Console.WriteLine(" type: " + tempMessageCollection.Count);
             //shortcut to handle the typing in currentMessage
             var b = 1;
             foreach (var obj in tempMessageCollection)
@@ -48,21 +44,11 @@ namespace MessageAPI.Controllers
                     Console.WriteLine("Exception caught: {0}", ex.Message);
                 }
             }
-
-            /*
-            //double checking values, keep for now
-            var foo = messages.FirstOrDefault();
-            //alla värden stämmer överens enligt ovan mappning mot filen
-            Console.WriteLine(
-                "id:" + foo.Id +
-                " name:" + foo.Name + 
-                " modData:" + foo.ModifiedDate +
-                " isSent:" + foo.IsSent + 
-                " pubId:" + foo.PublicationId);*/
         }
 
         public bool Delete(int id)
         {
+            
             try
             {
                 //messages.RemoveAll(message => message.Id == id);
@@ -70,6 +56,7 @@ namespace MessageAPI.Controllers
                 if (itemToRemove != null)
                 {
                     messages.RemoveAll(m => m.Id == id);
+                    Console.WriteLine(messages);
                     return true; 
                 }
                 return false;
@@ -82,17 +69,17 @@ namespace MessageAPI.Controllers
 
         public IEnumerable<MailMessage> Find(Expression<Func<MailMessage, bool>> filter)
         {
-            throw new NotImplementedException();
+            return messages.Where(filter.Compile());
         }
 
         public IEnumerable<MailMessage> GetAll()
         {
-            return messages;
+            return messages.GetRange(0, 100);
         }
 
         public MailMessage GetById(int id)
         {
-            var res = messages.Where(message => message.Id == id).ToList();
+            var res = messages.Where(m => m.Id == id).ToList();
             if (res.Count > 0)
             {
                 return res.ElementAt(0);

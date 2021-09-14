@@ -26,6 +26,7 @@ namespace TestProject
             MailMessageRepository msg = new MailMessageRepository();
             int idToBeRemoved = 90;
             bool expected = true;
+           
             Assert.Equal(expected, msg.Delete(idToBeRemoved));
 
             MailMessage expectedDoubleCheck = null;

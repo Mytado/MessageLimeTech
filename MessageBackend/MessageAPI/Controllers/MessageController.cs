@@ -18,18 +18,21 @@ namespace MessageAPI.Controllers
         private readonly IMailMessageRepository _messageRepository;
         private readonly IMapper _mapper;
 
-
         public MessageController(IMailMessageRepository messageRepository, IMapper mapper)
         {
             this._messageRepository = messageRepository;
             this._mapper = mapper;
-
         }
 
         // GET: api/<MessageController>
         [HttpGet]
-        public ActionResult<IEnumerable<MessageDTO>> GetAllMessages()
+        public ActionResult<IEnumerable<MessageDTO>> GetAllMessages(string search)
         {
+            Console.WriteLine("search log -" + search +"-");
+            if (search != null)
+            {   
+                return Ok(_mapper.Map<List<MessageDTO>>(_messageRepository.Find(m => m.Name.ToLower().Contains(search.ToLower())).ToList()));  
+            }
             var allMessages = _messageRepository.GetAll();
             return Ok(_mapper.Map<List<MessageDTO>>(allMessages));
         }

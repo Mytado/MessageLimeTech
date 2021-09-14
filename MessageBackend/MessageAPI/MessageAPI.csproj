@@ -11,8 +11,12 @@
 
   <ItemGroup>
     <Reference Include="Lime.Domain">
-      <HintPath>..\..\..\..\Documents\Kodtest_lime\Lime.Domain.dll</HintPath>
+      <HintPath>..\Lime.Domain.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Repository\" />
   </ItemGroup>
 
 </Project>
